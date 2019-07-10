@@ -1,66 +1,87 @@
-importScripts("/_nuxt/workbox.dev.c21f51f2.js");
+importScripts("/_nuxt/workbox.4c4f5ca6.js");
 
-const workboxSW = new self.WorkboxSW({
-    cacheId: "bael-cms-template",
-    clientsClaim: true,
-    directoryIndex: "/"
-});
-
-workboxSW.precache([
+workbox.precaching.precacheAndRoute(
+    [
+        {
+            url: "/_nuxt/0d3770bae32970ad6934.js",
+            revision: "83bac57f046fc33ae546b19c710d5cc8"
+        },
+        {
+            url: "/_nuxt/18807efb12aada0ab34f.js",
+            revision: "4027d9d69a0305914a15dd6391d1a59c"
+        },
+        {
+            url: "/_nuxt/3e66a98f0421c0167477.js",
+            revision: "da710719f74ff5f4d7b73ec1fc82043c"
+        },
+        {
+            url: "/_nuxt/464d25bf588bfbac2841.css",
+            revision: "49a73f71935b878ccb7f81c876cee4fb"
+        },
+        {
+            url: "/_nuxt/6fa1026982a3d5d35dab.css",
+            revision: "4d61ce0f807eb249d9600559a368085b"
+        },
+        {
+            url: "/_nuxt/82bca42ae6ee8c428782.js",
+            revision: "c7fb5ace94805441ba4e07361582e40d"
+        },
+        {
+            url: "/_nuxt/8fca9af8096d1a9031df.js",
+            revision: "ca7e15efeac469e4acd5e97a4d45fbea"
+        },
+        {
+            url: "/_nuxt/9c1d434a2678603a4f6f.js",
+            revision: "9e1655120481b75f93c5e137ce375098"
+        },
+        {
+            url: "/_nuxt/aab61bd5a81363c77283.js",
+            revision: "8291e599bc7df3cf37704e637b1a9760"
+        },
+        {
+            url: "/_nuxt/ba6d249f2547e84fc5d1.js",
+            revision: "f503570c2d23e27032b432444d1e0508"
+        },
+        {
+            url: "/_nuxt/e0dca7bd9a503e0f43b4.css",
+            revision: "191959581356062d4ec655049c4b82a3"
+        },
+        {
+            url: "/_nuxt/f8e5a9ea397a826b43da.js",
+            revision: "4088225a46e32aba10ff84aa2be1764c"
+        },
+        {
+            url: "/_nuxt/fc6cde20c5726c9b67dc.css",
+            revision: "570a46bcac73e9592d39654829f3ca8a"
+        }
+    ],
     {
-        url: "/_nuxt/03bfbac93cf29dfa7b30.js",
-        revision: "09154b6befafc7f01837c53d1a31df85"
-    },
-    {
-        url: "/_nuxt/098c8560743a94312b82.js",
-        revision: "7526f4c2229dbeaeeb3108ef5dd373e7"
-    },
-    {
-        url: "/_nuxt/12de1b50a49f81408dcf.css",
-        revision: "cfef01e8b2f16b0f478ba50c66f231b2"
-    },
-    {
-        url: "/_nuxt/26f5da7e2cd150912eca.js",
-        revision: "7163e2c49e35177cce34203e1a4c8398"
-    },
-    {
-        url: "/_nuxt/471f1cc4719e779c1781.css",
-        revision: "750e44d4546b4f0905579c6885ab58d6"
-    },
-    {
-        url: "/_nuxt/64ffca04ca9b8a255502.js",
-        revision: "9417b906f573cd28b17fe15f9adda831"
-    },
-    {
-        url: "/_nuxt/7e16c2d1904fe8008c6e.css",
-        revision: "76fef9861851f2ee38590539976b8fd1"
-    },
-    {
-        url: "/_nuxt/86ad3cdcc40313620480.css",
-        revision: "76fef9861851f2ee38590539976b8fd1"
-    },
-    {
-        url: "/_nuxt/9ec57e4dabcf6aeed5d0.js",
-        revision: "36359da7227f3eabe1828c322eb1dec5"
-    },
-    {
-        url: "/_nuxt/a7b3301561ba4f3cc5f9.css",
-        revision: "0dfcd8f1a9bbca12d3cb32d12980a703"
-    },
-    {
-        url: "/_nuxt/e408c73ecbc745fdce85.js",
-        revision: "24e2649090e8ebcd51e6ab71906e0140"
+        cacheId: "bael-cms-template",
+        directoryIndex: "/",
+        cleanUrls: false
     }
-]);
+);
 
-workboxSW.router.registerRoute(
+workbox.clientsClaim();
+workbox.skipWaiting();
+
+workbox.routing.registerRoute(
     new RegExp("/_nuxt/.*"),
-    workboxSW.strategies.cacheFirst({}),
+    workbox.strategies.cacheFirst({}),
     "GET"
 );
 
-workboxSW.router.registerRoute(
+workbox.routing.registerRoute(
     new RegExp("/.*"),
-    workboxSW.strategies.networkFirst({}),
+    workbox.strategies.networkFirst({}),
+    "GET"
+);
+
+workbox.routing.registerRoute(
+    new RegExp("/images/uploads/.*"),
+    workbox.strategies.cacheFirst({
+        cacheName: "image-cache",
+        cacheExpiration: { maxEntries: 100, maxAgeSeconds: 86400 }
+    }),
     "GET"
 );

@@ -15,35 +15,15 @@
             </div>
         </div>
         <ul class="zap-slideout-menu list-unstyled black-font">
-            <li class="zap-slideout-menu-item">
-                <nuxt-link
-                    style="color:#000"
-                    class="text-black black-font"
-                    to="/"
-                    exact
-                >
-                    <img
-                        style="width:64px;"
-                        class="xs-block xs-fit xs-mb2"
-                        v-if="
-                            this.$store.state.siteInfo.siteicon &&
-                                this.$store.state.siteInfo.showmenu
-                        "
-                        :src="this.$store.state.siteInfo.siteicon"
-                        :alt="menuSiteName"
-                    />
-                    {{ menuSiteName }}
-                </nuxt-link>
-            </li>
             <li class="zap-slideout-menu-item--small">
                 <nuxt-link to="/" exact>Home</nuxt-link>
             </li>
-            <li
+            <!-- <li
                 v-if="this.$store.state.allCats"
                 class="zap-slideout-menu-item--small"
             >
                 <nuxt-link to="/categories" exact>Categories</nuxt-link>
-            </li>
+            </li> -->
             <li
                 v-if="myPages"
                 v-for="(pg, i) in myPages"
@@ -51,20 +31,6 @@
                 class="zap-slideout-menu-item--small"
             >
                 <nuxt-link :to="pg._path">{{ pg.title }}</nuxt-link>
-            </li>
-            <li
-                v-if="menuLinks"
-                class="xs-mt5 zap-slideout-menu-item black-font"
-            >
-                Links
-            </li>
-            <li
-                v-if="menuLinks"
-                v-for="m in menuLinks"
-                :key="m.position"
-                class="zap-slideout-menu-item--small"
-            >
-                <a :href="m.link">{{ m.name }}</a>
             </li>
         </ul>
     </div>
@@ -78,9 +44,6 @@ export default {
         };
     },
     computed: {
-        menuLinks() {
-            return this.$store.state.siteInfo.menu;
-        },
         myPages() {
             return this.$store.state.allPages;
         },

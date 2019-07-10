@@ -1,19 +1,17 @@
 <template>
     <section class="container xs-border xs-text-5 md-text-4">
-        <BaelHeader
+        <TheHeader
             :blogtitle="blogtitle"
             :thecrumb="this.$store.state.theCrumb"
             :posts="blogposts"
         />
         <nuxt />
-        <SlideOut />
         <BaelFooter :pagination="paginate" />
     </section>
 </template>
 <script>
-import SlideOut from "~/components/SlideOut";
 import BaelFooter from "~/components/BaelFooter";
-import BaelHeader from "~/components/BaelHeader";
+import TheHeader from "~/components/TheHeader";
 
 export default {
     data() {
@@ -61,8 +59,7 @@ export default {
         }
     },
     components: {
-        SlideOut,
-        BaelHeader,
+        TheHeader,
         BaelFooter
     }
 };

@@ -1,48 +1,35 @@
 <template>
-    <nav ref="navBar" id="navbar" class="sm-border-bottom">
-        <div class="r">
-            <div class="c-4 xs-text-left xs-p2 sm-border-right">
-                <div class="item">
-                    <nuxt-link class="sitename" to="/" exact>{{
-                        headerSiteName
-                    }}</nuxt-link>
-                </div>
-            </div>
-
-            <div
-                class="c-4 xs-border-top xs-border-bottom sm-border-top-none sm-border-bottom-none sm-border-left sm-border-right xs-p2"
-            >
-                <div class="item xs-flex">
-                    <VueFuse
-                        placeholder="Search"
-                        :compResults="compResults"
-                        :keys="keys"
-                        :list="allPosts"
-                        event-name="searchChanged"
-                    />
-                </div>
-            </div>
-            <div
-                v-if="blogtitle"
-                style="z-index:55;"
-                class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar"
-            >
-                <div class="item">
-                    <nuxt-link to="/" exact>Home</nuxt-link>
-                    <span v-show="crumb">
-                        &nbsp;
-                        <span class="text-gray-lightest"> > </span> &nbsp;
-                        {{ thecrumb }}
-                    </span>
-                    &nbsp; <span class="text-gray-lightest"> > </span> &nbsp;
-                    {{ blogtitle }}
-                </div>
+    <nav ref="navBar" id="navbar" class="nav-bar r">
+        <div class="header c-6">
+            <img class="header__logo" src="~/assets/stag.svg" />
+            <nuxt-link class="header__site-name" to="/" exact>{{
+                headerSiteName
+            }}</nuxt-link>
+        </div>
+        <!-- MENU -->
+        <SlideOut />
+        <!-- BREADCRUMB -->
+        <div
+            v-if="blogtitle"
+            style="z-index:55;"
+            class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar"
+        >
+            <div class="item">
+                <nuxt-link to="/" exact>Home</nuxt-link>
+                <span v-show="crumb">
+                    &nbsp;
+                    <span class="text-gray-lightest"> > </span> &nbsp;
+                    {{ thecrumb }}
+                </span>
+                &nbsp; <span class="text-gray-lightest"> > </span> &nbsp;
+                {{ blogtitle }}
             </div>
         </div>
     </nav>
 </template>
 <script>
 import VueFuse from "~/components/VueFuse";
+import SlideOut from "~/components/SlideOut";
 export default {
     props: ["blogtitle", "posts", "thecrumb"],
     data() {
@@ -93,12 +80,33 @@ export default {
         this.$on("searchChanged", results => {
             this.compResults = results;
         });
+    },
+
+    components: {
+        SlideOut
     }
 };
 </script>
 <style>
-#navbar {
+.nav-bar {
     z-index: 999;
+}
+.header__logo {
+    width: 45px;
+    height: 45px;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header__site-name {
+    color: #000;
+    font-family: "Archivo Black", sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 18px;
+    padding-left: 16px;
 }
 .titlebar .item {
     overflow-x: none;
@@ -118,13 +126,6 @@ nav {
     top: 0;
     left: 0;
     right: 0;
-}
-.sitename {
-    color: #000;
-    font-family: "Archivo Black", sans-serif;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 18px;
 }
 @media only screen and (max-width: 40rem) {
     .results {
