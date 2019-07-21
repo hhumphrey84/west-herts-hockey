@@ -1,15 +1,21 @@
 <template>
-    <nav ref="navBar" id="navbar" class="nav-bar r">
-        <div class="header c-6">
-            <img class="header__logo" src="~/assets/stag.svg" />
-            <nuxt-link class="header__site-name" to="/" exact>{{
-                headerSiteName
-            }}</nuxt-link>
+    <nav ref="navBar" class="header">
+        <div class="header__container">
+            <TheHeaderNav />
+            <div class="header__masthead">
+                <nuxt-link to="/" exact class="header__logo">
+                    <img src="~/assets/stag.svg" />
+                    <!-- </nuxt-link>
+                        <nuxt-link to="/" exact> -->
+                    West Herts Hockey
+                </nuxt-link>
+            </div>
+            <a href="" class="header__link">
+                Members Site
+            </a>
         </div>
-        <!-- MENU -->
-        <SlideOut />
         <!-- BREADCRUMB -->
-        <div
+        <!-- <div
             v-if="blogtitle"
             style="z-index:55;"
             class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar"
@@ -24,12 +30,13 @@
                 &nbsp; <span class="text-gray-lightest"> > </span> &nbsp;
                 {{ blogtitle }}
             </div>
-        </div>
+        </div> -->
     </nav>
 </template>
 <script>
-import VueFuse from "~/components/VueFuse";
-import SlideOut from "~/components/SlideOut";
+// import VueFuse from "~/components/VueFuse";
+// import SlideOut from "~/components/SlideOut";
+import TheHeaderNav from "~/components/TheHeaderNav";
 export default {
     props: ["blogtitle", "posts", "thecrumb"],
     data() {
@@ -49,87 +56,97 @@ export default {
             compResults: []
         };
     },
-    components: { VueFuse },
+    components: { TheHeaderNav },
     computed: {
-        allPosts() {
-            let posts = this.$store.state.blogPosts;
-            let pages = this.$store.state.allPages;
-            let both = posts.concat(pages);
-            return both;
-        },
-        headerSiteName() {
-            return this.$store.state.siteInfo.sitename;
-        },
-        componentResults() {
-            return this.$store.state.results;
-        },
-        crumb() {
-            return this.$store.state.theCrumb;
+        navItems() {
+            return this.$store.state.allPages;
         }
-    },
-
-    methods: {
-        navHeight() {
-            var height = document.getElementById("navbar").clientHeight;
-            console.log(height);
-            this.$store.commit("SET_NAVHEIGHT", height - 1);
-        }
-    },
-
-    mounted() {
-        this.$on("searchChanged", results => {
-            this.compResults = results;
-        });
-    },
-
-    components: {
-        SlideOut
+        // allPosts() {
+        //     let posts = this.$store.state.blogPosts;
+        //     let pages = this.$store.state.allPages;
+        //     let both = posts.concat(pages);
+        //     return both;
+        // },
+        // headerSiteName() {
+        //     return this.$store.state.siteInfo.sitename;
+        // },
+        // componentResults() {
+        //     return this.$store.state.results;
+        // },
+        // crumb() {
+        //     return this.$store.state.theCrumb;
+        // }
     }
+
+    // methods: {
+    //     navHeight() {
+    //         var height = document.getElementById("navbar").clientHeight;
+    //         console.log(height);
+    //         this.$store.commit("SET_NAVHEIGHT", height - 1);
+    //     }
+    // },
+
+    // mounted() {
+    //     this.$on("searchChanged", results => {
+    //         this.compResults = results;
+    //     });
+    // },
+
+    // components: {
+    //     SlideOut
+    // }
 };
 </script>
 <style>
-.nav-bar {
-    z-index: 999;
+.header {
+    border-top: 8px #232c37 solid;
+    padding: 0 8px;
+    background-color: #363f4c;
+}
+.header__container {
+    max-width: 1220px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.header__masthead {
+    flex: 1;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: bold;
+}
+.header__masthead > a {
+    color: #ffffff;
 }
 .header__logo {
-    width: 45px;
-    height: 45px;
-}
-.header {
+    /* width: 60px; */
+    height: 60px;
+    padding: 4px 8px 8px 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    /* text-align: center; */
+    /* margin-right: 8px; */
 }
-.header__site-name {
-    color: #000;
-    font-family: "Archivo Black", sans-serif;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 18px;
-    padding-left: 16px;
+
+.header__logo > img {
+    height: 100%;
+    margin-right: 8px;
 }
-.titlebar .item {
-    overflow-x: none;
+.header__link {
+    font-size: 14px;
+    color: #ffffff;
+    border: 2px rgba(166, 173, 187, 0.3) solid;
+    padding: 8px;
+    font-weight: 800;
+    transition: 0.3s;
 }
-.results {
-    padding-left: 0;
-    transform: translateY(17px);
-    width: 30vw;
-}
-.results li {
-    list-style-type: none;
-    margin-left: 0;
-}
-nav {
-    position: fixed;
-    background: white;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-@media only screen and (max-width: 40rem) {
-    .results {
-        width: 94vw;
-    }
+.header__link:hover {
+    border: 2px rgba(166, 173, 187, 0.8) solid;
 }
 </style>

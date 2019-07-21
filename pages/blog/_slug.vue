@@ -91,8 +91,8 @@ export default {
             console.log("slug resize");
         },
         navHeight() {
-            var height = document.getElementById("navbar").clientHeight;
-            this.$store.commit("SET_NAVHEIGHT", height);
+            // var height = document.getElementById("navbar").clientHeight;
+            // this.$store.commit("SET_NAVHEIGHT", height);
         }
     },
     updated() {
