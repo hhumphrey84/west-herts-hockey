@@ -1,19 +1,17 @@
 <template>
     <section class="container xs-border xs-text-5 md-text-4">
-        <BaelHeader
+        <TheHeader
             :blogtitle="blogtitle"
             :thecrumb="this.$store.state.theCrumb"
             :posts="blogposts"
         />
         <nuxt />
-        <SlideOut />
         <BaelFooter :pagination="paginate" />
     </section>
 </template>
 <script>
-import SlideOut from "~/components/SlideOut";
 import BaelFooter from "~/components/BaelFooter";
-import BaelHeader from "~/components/BaelHeader";
+import TheHeader from "~/components/TheHeader";
 
 export default {
     data() {
@@ -24,11 +22,10 @@ export default {
 
     methods: {
         navHeight() {
-            if (process.browser) {
-                var height = document.getElementById("navbar").clientHeight;
-
-                this.$store.commit("SET_NAVHEIGHT", height - 1);
-            }
+            // if (process.browser) {
+            //     var height = document.getElementById("navbar").clientHeight;
+            //     this.$store.commit("SET_NAVHEIGHT", height - 1);
+            // }
         }
     },
     updated() {
@@ -61,8 +58,7 @@ export default {
         }
     },
     components: {
-        SlideOut,
-        BaelHeader,
+        TheHeader,
         BaelFooter
     }
 };
@@ -76,49 +72,27 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-.main-title {
-    font-size: 3rem;
-    font-family: "Archivo Black", sans-serif;
-    font-weight: 400;
-    line-height: 1;
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
-.feat-wrapper {
-    max-height: 55vh;
-    width: 100%;
+
+html,
+body {
+    height: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Fjalla One", sans-serif;
 }
-.slide-left-enter,
-.slide-right-leave-active {
-    transform: translate(50%, 0);
-    opacity: 0;
-    transition: all 0.25s;
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
-.slide-left-leave-active,
-.slide-right-enter {
-    transform: translate(-50%, 0);
-    opacity: 0;
-    transition: all 0.25s;
-}
-.slide-down-enter,
-.slide-up-leave-active {
-    transform: translate(0, 50%);
-    opacity: 1;
-    transition: all 0.25s;
-}
-.slide-down-leave-active,
-.slide-up-enter {
-    transform: translate(0, -50%);
-    opacity: 1;
-    transition: all 0.25s;
-}
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
-    transition-delay: 0.3s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
-}
-.post-content {
-    max-width: 75ch;
+
+a {
+    text-decoration: none;
 }
 </style>
