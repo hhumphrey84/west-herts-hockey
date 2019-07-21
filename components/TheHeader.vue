@@ -1,44 +1,34 @@
 <template>
     <nav ref="navBar" class="header">
-        <div class="header__container">
-            <TheHeaderNav />
-            <div class="header__masthead">
-                <nuxt-link to="/" exact class="header__logo">
-                    <img src="~/assets/stag.svg" />
-                    West Herts Hockey
-                </nuxt-link>
+        <div class="header__top-bar">
+            <div class="header__container container">
+                <TheHeaderNav />
+                <div class="header__masthead">
+                    <nuxt-link to="/" exact class="header__logo">
+                        <img src="~/assets/stag.svg" />
+                        {{ siteHeader }}
+                    </nuxt-link>
+                </div>
+                <a href="" class="header__link">
+                    Members Site
+                </a>
             </div>
-            <a href="" class="header__link">
-                Members Site
-            </a>
         </div>
+        <TheBreadcrumb />
     </nav>
 </template>
 <script>
 import TheHeaderNav from "~/components/TheHeaderNav";
-export default {
-    props: ["blogtitle", "posts", "thecrumb"],
-    data() {
-        return {
-            results: [],
-            keys: [
-                {
-                    name: "title",
-                    weight: 0.3
-                },
-                {
-                    name: "body",
-                    weight: 0.7
-                }
-            ],
+import TheBreadcrumb from "~/components/TheBreadcrumb";
 
-            compResults: []
-        };
+export default {
+    components: {
+        TheHeaderNav,
+        TheBreadcrumb
     },
-    components: { TheHeaderNav },
     computed: {
-        navItems() {
-            return this.$store.state.allPages;
+        siteHeader() {
+            return this.$store.state.siteInfo.sitename;
         }
     }
 };
@@ -46,15 +36,18 @@ export default {
 <style>
 .header {
     border-top: 8px #232c37 solid;
-    padding: 0 8px;
-    background-color: #363f4c;
+    background-color: #f7f7f7;
+    border-bottom: 1px #dddddd solid;
+}
+.header__top-bar {
+    background: #363f4c;
 }
 .header__container {
-    max-width: 1220px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
+    position: relative;
 }
+
 .header__masthead {
     flex: 1;
     display: flex;
@@ -65,6 +58,7 @@ export default {
     font-size: 20px;
     color: #ffffff;
     font-weight: bold;
+    font-family: "Fjalla One", sans-serif;
 }
 .header__masthead > a {
     color: #ffffff;
@@ -88,6 +82,7 @@ export default {
     padding: 8px;
     font-weight: 800;
     transition: 0.3s;
+    font-family: "Fjalla One", sans-serif;
 }
 .header__link:hover {
     border: 2px rgba(166, 173, 187, 0.8) solid;

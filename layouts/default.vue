@@ -1,10 +1,6 @@
 <template>
-    <section class="container xs-border xs-text-5 md-text-4">
-        <TheHeader
-            :blogtitle="blogtitle"
-            :thecrumb="this.$store.state.theCrumb"
-            :posts="blogposts"
-        />
+    <section>
+        <TheHeader />
         <nuxt />
         <BaelFooter :pagination="paginate" />
     </section>
@@ -65,13 +61,6 @@ export default {
 </script>
 
 <style>
-html,
-body {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
 * {
     box-sizing: border-box;
     padding: 0;
@@ -83,7 +72,7 @@ body {
     height: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-family: "Fjalla One", sans-serif;
+    font-family: "Cantarell", sans-serif;
 }
 
 ul {
@@ -94,5 +83,12 @@ ul {
 
 a {
     text-decoration: none;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 8px;
+    max-width: 1220px;
 }
 </style>
