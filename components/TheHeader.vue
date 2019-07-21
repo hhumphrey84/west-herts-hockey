@@ -5,8 +5,6 @@
             <div class="header__masthead">
                 <nuxt-link to="/" exact class="header__logo">
                     <img src="~/assets/stag.svg" />
-                    <!-- </nuxt-link>
-                        <nuxt-link to="/" exact> -->
                     West Herts Hockey
                 </nuxt-link>
             </div>
@@ -14,28 +12,9 @@
                 Members Site
             </a>
         </div>
-        <!-- BREADCRUMB -->
-        <!-- <div
-            v-if="blogtitle"
-            style="z-index:55;"
-            class="c-12 xs-border-top xs-border-bottom xs-p2 xs-text-6 titlebar"
-        >
-            <div class="item">
-                <nuxt-link to="/" exact>Home</nuxt-link>
-                <span v-show="crumb">
-                    &nbsp;
-                    <span class="text-gray-lightest"> > </span> &nbsp;
-                    {{ thecrumb }}
-                </span>
-                &nbsp; <span class="text-gray-lightest"> > </span> &nbsp;
-                {{ blogtitle }}
-            </div>
-        </div> -->
     </nav>
 </template>
 <script>
-// import VueFuse from "~/components/VueFuse";
-// import SlideOut from "~/components/SlideOut";
 import TheHeaderNav from "~/components/TheHeaderNav";
 export default {
     props: ["blogtitle", "posts", "thecrumb"],
@@ -61,40 +40,7 @@ export default {
         navItems() {
             return this.$store.state.allPages;
         }
-        // allPosts() {
-        //     let posts = this.$store.state.blogPosts;
-        //     let pages = this.$store.state.allPages;
-        //     let both = posts.concat(pages);
-        //     return both;
-        // },
-        // headerSiteName() {
-        //     return this.$store.state.siteInfo.sitename;
-        // },
-        // componentResults() {
-        //     return this.$store.state.results;
-        // },
-        // crumb() {
-        //     return this.$store.state.theCrumb;
-        // }
     }
-
-    // methods: {
-    //     navHeight() {
-    //         var height = document.getElementById("navbar").clientHeight;
-    //         console.log(height);
-    //         this.$store.commit("SET_NAVHEIGHT", height - 1);
-    //     }
-    // },
-
-    // mounted() {
-    //     this.$on("searchChanged", results => {
-    //         this.compResults = results;
-    //     });
-    // },
-
-    // components: {
-    //     SlideOut
-    // }
 };
 </script>
 <style>
@@ -124,14 +70,11 @@ export default {
     color: #ffffff;
 }
 .header__logo {
-    /* width: 60px; */
     height: 60px;
     padding: 4px 8px 8px 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* text-align: center; */
-    /* margin-right: 8px; */
 }
 
 .header__logo > img {
